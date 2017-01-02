@@ -1,4 +1,5 @@
 let {join} = require("path");
+let webpack = require('webpack');
 let htmlPlugin = require('html-webpack-plugin');
 let BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 
@@ -23,6 +24,11 @@ module.exports = {
 	},
 	plugins: [
 		new BellOnBundlerErrorPlugin(),
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify('production')
+			}
+		}),
 		new htmlPlugin({
 			template: join(__dirname, 'src/index.html'),
 			inject: 'body'
