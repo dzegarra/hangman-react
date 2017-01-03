@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import CircularProgress from 'material-ui/CircularProgress';
 import unique from 'lodash/uniq';
 import LettersBoard from './LettersBoard';
+import Man from './Man';
 import MissedLetters from './MissedLetters';
 
 export default class Game extends React.Component {
@@ -160,13 +161,16 @@ export default class Game extends React.Component {
             </div>;
         } else {
             return (
-                <div>
-                    <LettersBoard 
-                        word={this.state.word} 
-                        usedLetters={this.state.goodLetters} />
-                    {this.state.wrongLetters.length > 0 && 
-                        <MissedLetters letters={this.state.wrongLetters} />
-                    }
+                <div className="game">
+                    <Man className="man" mistakes={this.state.wrongLetters.length} />
+                    <div className="board">
+                        <LettersBoard 
+                            word={this.state.word} 
+                            usedLetters={this.state.goodLetters} />
+                        {this.state.wrongLetters.length > 0 && 
+                            <MissedLetters letters={this.state.wrongLetters} />
+                        }
+                    </div>
                 </div>
             );
         }

@@ -1,7 +1,7 @@
 let {join} = require("path");
 let webpack = require('webpack');
-let htmlPlugin = require('html-webpack-plugin');
-let BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
+let htmlWebpackPlugin = require('html-webpack-plugin');
+//let BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 
 module.exports = {
 	devtool: 'source-map',
@@ -20,16 +20,16 @@ module.exports = {
 		]
 	},
 	devServer: {
-		contentBase: join(__dirname, './build')
+		contentBase: join(__dirname, 'build')
 	},
 	plugins: [
-		new BellOnBundlerErrorPlugin(),
-		new webpack.DefinePlugin({
+		//new BellOnBundlerErrorPlugin(),
+		/*new webpack.DefinePlugin({
 			'process.env': {
 				'NODE_ENV': JSON.stringify('production')
 			}
-		}),
-		new htmlPlugin({
+		}),*/
+		new htmlWebpackPlugin({
 			template: join(__dirname, 'src/index.html'),
 			inject: 'body'
 		})

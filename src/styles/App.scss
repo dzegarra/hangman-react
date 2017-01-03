@@ -15,3 +15,14 @@ html, body {
     justify-content: center;
     align-items: center;
 }
+
+.game {
+    display: flex;
+    flex-direction: row;
+}
+
+.board {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
