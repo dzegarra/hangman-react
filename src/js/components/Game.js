@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CircularProgress from 'material-ui/CircularProgress';
+//import CircularProgress from 'material-ui/CircularProgress';
 import unique from 'lodash/uniq';
 import LettersBoard from './LettersBoard';
 import Man from './Man';
@@ -155,12 +155,8 @@ export default class Game extends React.Component {
     }
 
     render() {
-        if (this.state.active && this.state.word.length == 0) {
-            return <div className="center-all">
-                <CircularProgress />
-            </div>;
-        } else {
-            return (
+        return (
+            <div>
                 <div className="game">
                     <Man className="man" mistakes={this.state.wrongLetters.length} />
                     <div className="board">
@@ -172,8 +168,10 @@ export default class Game extends React.Component {
                         }
                     </div>
                 </div>
-            );
-        }
+                {this.state.active && this.state.word.length == 0 && <div className="center-all">
+                    <div className="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+                </div>}
+            </div>
+        );
     }
-
 }

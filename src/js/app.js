@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import 'material-design-lite';
+
 import LettersBoard from './components/LettersBoard';
 import Man from './components/Man';
 import Overlay from './components/Overlay';
 import Game from './components/Game';
 import '../styles/main.scss';
-
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
 
 class App extends React.Component {
 
@@ -44,26 +40,16 @@ class App extends React.Component {
 
     render() {
         return (
-            <MuiThemeProvider>
-                <div>
-                    <Overlay 
-                        title={this.state.dialogTitle} 
-                        message={this.state.dialogMsg} 
-                        onRequestClose={this.resetGame} />
-                    <Game 
-                        onRequestShowMessage={this.showMessage} />
-                </div>
-            </MuiThemeProvider>
+            <div>
+                <Overlay 
+                    title={this.state.dialogTitle} 
+                    message={this.state.dialogMsg} 
+                    onRequestClose={this.resetGame} />
+                <Game 
+                    onRequestShowMessage={this.showMessage} />
+            </div>
         );
     }
-
-    /**<div>
-        <div>
-            <Man />
-            <UsedLetters />
-        </div>
-        <LettersBoard />
-    </div> */
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));

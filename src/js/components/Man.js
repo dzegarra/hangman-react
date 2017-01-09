@@ -22,13 +22,22 @@ export default class Man extends React.Component {
         'leg-right'
     ];
 
-    shouldComponentUpdate(nextProps, nextState) {
-        this.setProgress(nextProps.mistakes);
-        return true;
+
+    componentDidMount() {
+        this.hideAllBody();
     }
 
-    hideAllBody() {
+    shouldComponentUpdate(nextProps) {
+        this.setProgress(nextProps.mistakes);
+        return false;// Never NEVER! re-render this component
+    }
 
+
+    hideAllBody() {
+        const len = this.bodyParts.length;
+        for ( let i=0 ; i < len ; i++ ) {
+            this.hideBodyPart(this.bodyParts[i]);
+        }
     }
 
     showBodyPart(name) {
@@ -36,29 +45,29 @@ export default class Man extends React.Component {
         node.setAttribute('visibility', 'visible');
     }
 
-    hideBodyPart() {
+    hideBodyPart(name) {
         let node = this.el.getElementById(name);
         node.setAttribute('visibility', 'hidden');
     }
 
     setProgress(value) {
         let partIndex = 0,
-            limit = value < this.bodyParts.length ? value : this.bodyParts.length;
+            limit = (value < this.bodyParts.length) ? value : this.bodyParts.length;
         
         this.hideAllBody();
-        
+
         while(partIndex < limit) {
             this.showBodyPart(this.bodyParts[partIndex]);
+            partIndex++;
         }
     }
 
     render() {
+        console.log('kajdhnsfkljadgs');
         const className = this.props.className || '';
-        let svg = require('raw-loader!../../images/man.svg');
-        return <div dangerouslySetInnerHTML={{__html: svg}} className={className} ref={(elContainer) => {
-            let svg = elContainer.querySelector('svg');
-            console.log(svg);
-            this.el = svg;
+        const svg = require('raw-loader!../../images/man.svg');
+        return <div dangerouslySetInnerHTML={{__html: svg}} className={className} ref={(el) => {
+            this.el = document.querySelector('svg');
         }}/>;
     }
 
